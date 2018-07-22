@@ -20,7 +20,7 @@ node('master')
     stage('ContinuousDelivery')
     {
        input message: 'Requesting for approval from DM', submitter: 'admin'
-        sh 'scp /var/lib/jenkins/tom/webapp/target/webapp.war ubuntu@172.31.4.140:/var/lib/tomcat7/webapps/prodenv.war'
+        sh 'scp /var/lib/jenkins/tom/webapp/target/webapp.war ubuntu@172.31.4.140:/var/lib/tomcat8/webapps/prodenv.war'
     }
     
     
