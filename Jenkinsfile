@@ -2,7 +2,7 @@ node('master')
 {
     stage('ContinuousDownload') 
     {
-       git 'https://github.com/selenium-saikrishna/maven.git'
+       git 'https://github.com/naveev/maven-1.git'
     }
     stage('ContinuousBuild')
     {
@@ -10,17 +10,17 @@ node('master')
     }
     stage('ContinuousDeployment')
     {
-         sh 'scp /home/vagrant/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war vagrant@10.10.10.52:/var/lib/tomcat7/webapps/qaenv.war'
+         sh 'scp /var/lib/jenkins/workspace/tom/webapp/target/webapp.war ubuntu@172.31.28.172:/var/lib/tomcat7/webapps/qaenv.war'
     }
     stage('ContinuousTesting')
     {
         git 'https://github.com/selenium-saikrishna/TestingOnLinux.git'
-        sh 'java -jar /home/vagrant/.jenkins/workspace/ScriptedPipeline/testing.jar'
+        sh 'java -jar /var/lib/jenkins/workspace/tom/testing.jar'
     }
     stage('ContinuousDelivery')
     {
-       input message: 'Requesting for approval from DM', submitter: 'Ranjit'
-        sh 'scp /home/vagrant/.jenkins/workspace/ScriptedPipeline/webapp/target/webapp.war vagrant@10.10.10.53:/var/lib/tomcat7/webapps/prodenv.war'
+       input message: 'Requesting for approval from DM', submitter: 'admin'
+        sh 'scp /var/lib/jenkins/tom/webapp/target/webapp.war ubuntu@172.31.4.140:/var/lib/tomcat7/webapps/prodenv.war'
     }
     
     
